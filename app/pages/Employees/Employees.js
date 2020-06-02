@@ -6,11 +6,12 @@ import classes from "./style.css";
 
 const Employees = () => {
 	const [employees, setEmployees] = useState([]);
+	const [sortByAge, setSortByAge] = useState("ASC");
 
 	useEffect(() => {
 		// Fetch all employes and set them to the state
 		getAllEmployees().then((data) => setEmployees(data));
-	});
+	}, []);
 
 	const handleDeleteEmployee = (employeeId) => {
 		const sure = confirm("Are you sure you want to delete this user");
@@ -22,7 +23,21 @@ const Employees = () => {
 		}
 	};
 
-	const tableBody = employees.map((employee) => {
+	const sortByAgeHandler = () => {
+		const sort = sortByAge === "ASC" ? "DESC" : "ASC";
+		setSortByAge(sort);
+	};
+
+	// Sort employees
+	const sortedEmployees = employees.sort((a, b) => {
+		if(sortByAge === "ASC") {
+			return a.employee_age - b.employee_age;
+		}
+
+		return b.employee_age - a.employee_age;
+	})
+
+	const tableBody = sortedEmployees.map((employee) => {
 		const profileImage = employee.profile_image || "https://via.placeholder.com/70";
 		return (
 			<tr key={employee.id}>
@@ -34,7 +49,7 @@ const Employees = () => {
 				<td><span className={classes.link} onClick={() => handleDeleteEmployee(employee.id)}>DELETE</span></td>
 			</tr>
 		);
-	})
+	});
 
 	return (
 		<Table striped bordered hover>
@@ -43,7 +58,7 @@ const Employees = () => {
 					<th>#</th>
 					<th>Name</th>
 					<th>Salary</th>
-					<th>Age</th>
+					<th onClick={sortByAgeHandler}>Age</th>
 					<th></th>
 					<th></th>
 				</tr>

@@ -37,7 +37,8 @@ const EmployeeForm = (props) => {
 			<Form.Group controlId="formBasicEmail">
 				<Form.Label>Employee name</Form.Label>
 				<Form.Control 
-					required name="employee_name" 
+					required 
+					name="employee_name" 
 					type="Text" 
 					placeholder="Write the employee name" 
 					onChange={onChange}
@@ -59,7 +60,8 @@ const EmployeeForm = (props) => {
 			<Form.Group controlId="formBasicCheckbox">
 				<Form.Label>Salary</Form.Label>
 				<Form.Control 
-					required name="employee_salary" 
+					required 
+					name="employee_salary" 
 					type="number" 
 					placeholder="Salary" 
 					onChange={onChange}
