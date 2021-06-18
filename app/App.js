@@ -9,6 +9,7 @@ import NotFound from "./pages/NotFound/NotFound";
 import { Container, Nav } from "react-bootstrap";
 import "./index.css";
 
+console.log("test");
 const App = () => {
     return(
 		<Container>
